@@ -87,6 +87,14 @@ fetch(
 )
   .then((res) => res.json())
   .then((data) => {
+    console.log(1, data);
+    data.edge = {
+      source: data.id,
+      target: data.id,
+      midPointColor: "#f00",
+      quatileColor: "#f00"
+    };
+
     const container = document.getElementById("container");
     const width = container.scrollWidth;
     const height = container.scrollHeight || 500;
@@ -117,7 +125,44 @@ fetch(
         ]
       },
       defaultEdge: {
-        type: "cubic-horizontal"
+        type: "cubic-horizontal",
+        style: {
+          stroke: "#eee",
+          cursor: "default",
+          endArrow: {
+            path: ""
+          },
+          startArrow: {
+            $arrowType: "diy",
+            $path: "M 0,0 L 10,5 L 10,-5 Z",
+            $compute: (e) => e,
+            path: "M 0,0 L 10,5 L 10,-5 Z",
+            d: 0,
+            fill: "#eee"
+          },
+          strokeOpacity: 1,
+          shadowColor: "#ffffff",
+          lineAppendWidth: 2,
+          lineWidth: 1
+        },
+        labelCfg: {
+          position: "middle",
+          style: {
+            textAlign: "center",
+            textBaseline: "middle",
+            fontStyle: "italic",
+            fill: "red",
+            stroke: "red"
+          }
+        }
+        // startArrow: {
+        //   path: 'M 0,0 L 12,6 L 9,0 L 12,-6 Z',
+        //   fill: '#F6BD16',
+        // },
+        // endArrow: {
+        //   path: 'M 0,0 L 12,6 L 9,0 L 12,-6 Z',
+        //   fill: '#fff',
+        // },
       },
       layout: {
         type: "dendrogram",
@@ -134,11 +179,11 @@ fetch(
           node.children && node.children.length > 0 ? "" : "background-animate",
         color: node.children && node.children.length > 0 ? "green" : "red",
         labelCfg: {
-          position: node.children && node.children.length > 0 ? "left" : "left"
+          position: "left"
           // offset: 5,
         }
       };
-      console.log(data, node);
+      // console.log(data, node);
 
       return data;
     });
