@@ -82,6 +82,10 @@ G6.registerNode(
   },
   "circle"
 );
+// 插件 - 小地图
+const minimap = new G6.Minimap({
+  size: [150, 100]
+});
 fetch(
   "https://gw.alipayobjects.com/os/antvdemo/assets/data/algorithm-category.json"
 )
@@ -102,6 +106,7 @@ fetch(
       container: "container",
       width,
       height,
+      plugins: [minimap],
       modes: {
         default: [
           {
