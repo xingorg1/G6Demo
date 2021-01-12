@@ -82,11 +82,11 @@ G6.registerNode(
   },
   "circle"
 );
-// 小地图
+// 插件 - 小地图
 const minimap = new G6.Minimap({
   size: [150, 100]
 });
-// 上下文菜单
+// 插件 - 上下文菜单
 const contextMenu = new G6.Menu({
   getContent(evt) {
     let header;
@@ -117,6 +117,32 @@ const contextMenu = new G6.Menu({
   // the types of items that allow the menu show up
   // 在哪些类型的元素上响应
   itemTypes: ["node", "edge", "canvas"]
+});
+// 插件 - 提示图
+const tooltip = new G6.Tooltip({
+  // offsetX and offsetY include the padding of the parent container
+  // offsetX 与 offsetY 需要加上父容器的 padding
+  offsetX: 10,
+  offsetY: 50 + 10,
+  // the types of items that allow the tooltip show up
+  // 允许出现 tooltip 的 item 类型
+  itemTypes: ["node", "edge"],
+  // custom the tooltip's content
+  // 自定义 tooltip 内容
+  getContent: (e) => {
+    const outDiv = document.createElement("div");
+    outDiv.style.width = "fit-content";
+    //outDiv.style.padding = '0px 0px 20px 0px';
+    outDiv.innerHTML = `
+      <h4>Custom Content</h4>
+      <ul>
+        <li>Type: ${e.item.getType()}</li>
+      </ul>
+      <ul>
+        <li>Label: ${e.item.getModel().label || e.item.getModel().id}</li>
+      </ul>`;
+    return outDiv;
+  }
 });
 // 数据
 const data = {
@@ -200,7 +226,7 @@ const graph = new G6.Graph({
     // 支持的 behavior
     edit: ["click-select"]
   },
-  plugins: [minimap, contextMenu],
+  plugins: [minimap, contextMenu, tooltip],
   layout: {
     type: "dagre",
     rankdir: "LR"
