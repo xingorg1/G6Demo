@@ -222,7 +222,7 @@ const graph = new G6.Graph({
   height: height,
   fitView: true,
   modes: {
-    default: ["drag-canvas", "drag-node", "zoom-canvas"],
+    default: ["drag-canvas", "drag-node", "zoom-canvas", "activate-relations"],
     // 支持的 behavior
     edit: ["click-select"]
   },
