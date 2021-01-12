@@ -82,6 +82,9 @@ G6.registerNode(
   },
   "circle"
 );
+const minimap = new G6.Minimap({
+  size: [150, 100]
+});
 const data = {
   nodes: [
     {
@@ -151,7 +154,7 @@ const data = {
 };
 const container = document.getElementById("container");
 const width = container.scrollWidth;
-const height = container.scrollHeight || 800;
+const height = container.scrollHeight || 660;
 const graph = new G6.Graph({
   container: container,
   width: width,
@@ -162,6 +165,7 @@ const graph = new G6.Graph({
     // 支持的 behavior
     edit: ["click-select"]
   },
+  plugins: [minimap],
   layout: {
     type: "dagre",
     rankdir: "LR"
