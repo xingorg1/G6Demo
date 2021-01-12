@@ -48,14 +48,16 @@ const data = {
 };
 const container = document.getElementById("container");
 const width = container.scrollWidth;
-const height = container.scrollHeight || 500;
+const height = container.clientHeight || 800;
 const graph = new G6.Graph({
   container: container,
   width: width,
   height: height,
   fitView: true,
   modes: {
-    default: ["drag-canvas", "drag-node"]
+    default: ["drag-canvas", "drag-node", "zoom-canvas"],
+    // 支持的 behavior
+    edit: ["click-select"]
   },
   layout: {
     type: "dagre",
