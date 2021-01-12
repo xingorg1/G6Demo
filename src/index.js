@@ -155,14 +155,6 @@ fetch(
             stroke: "red"
           }
         }
-        // startArrow: {
-        //   path: 'M 0,0 L 12,6 L 9,0 L 12,-6 Z',
-        //   fill: '#F6BD16',
-        // },
-        // endArrow: {
-        //   path: 'M 0,0 L 12,6 L 9,0 L 12,-6 Z',
-        //   fill: '#fff',
-        // },
       },
       layout: {
         type: "dendrogram",
