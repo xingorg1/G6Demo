@@ -1,54 +1,157 @@
 import G6 from "@antv/g6";
+// Background Animation
+G6.registerNode(
+  "background-animate",
+  {
+    afterDraw(cfg, group) {
+      const r = cfg.size / 2;
+      const back1 = group.addShape("circle", {
+        zIndex: -3,
+        attrs: {
+          x: 0,
+          y: 0,
+          r,
+          fill: cfg.color,
+          opacity: 0.6
+        },
+        name: "back1-shape"
+      });
+      const back2 = group.addShape("circle", {
+        zIndex: -2,
+        attrs: {
+          x: 0,
+          y: 0,
+          r,
+          fill: cfg.color,
+          opacity: 0.6
+        },
+        name: "back2-shape"
+      });
+      const back3 = group.addShape("circle", {
+        zIndex: -1,
+        attrs: {
+          x: 0,
+          y: 0,
+          r,
+          fill: cfg.color,
+          opacity: 0.6
+        },
+        name: "back3-shape"
+      });
+      group.sort(); // Sort according to the zIndex
+      back1.animate(
+        {
+          // Magnifying and disappearing
+          r: r + 10,
+          opacity: 0.1
+        },
+        {
+          duration: 3000,
+          easing: "easeCubic",
+          delay: 0,
+          repeat: true // repeat
+        }
+      ); // no delay
+      back2.animate(
+        {
+          // Magnifying and disappearing
+          r: r + 10,
+          opacity: 0.1
+        },
+        {
+          duration: 3000,
+          easing: "easeCubic",
+          delay: 1000,
+          repeat: true // repeat
+        }
+      ); // 1s delay
+      back3.animate(
+        {
+          // Magnifying and disappearing
+          r: r + 10,
+          opacity: 0.1
+        },
+        {
+          duration: 3000,
+          easing: "easeCubic",
+          delay: 2000,
+          repeat: true // repeat
+        }
+      ); // 3s delay
+    }
+  },
+  "circle"
+);
 const data = {
   nodes: [
     {
-      id: "Myriel",
-      label: "node1"
+      id: "雄霸-天下",
+      label: "node1",
+      type: "background-animate",
+      color: "#f40"
     },
     {
-      id: "Napoleon"
+      id: "秦霜"
     },
     {
-      id: "Mlle.Baptistine"
+      id: "步惊云",
+      type: "background-animate",
+      color: "#f40"
     },
     {
-      id: "Mme.Magloire"
+      id: "孔慈",
+      type: "background-animate",
+      color: "#f40"
     },
     {
-      id: "CountessdeLo"
+      id: "聂风"
     }
   ],
   edges: [
     {
-      source: "Napoleon",
-      target: "Myriel",
+      source: "秦霜",
+      target: "雄霸-天下",
       value: 1
     },
     {
-      source: "Mlle.Baptistine",
-      target: "Myriel",
-      value: 8
+      source: "步惊云",
+      target: "雄霸-天下",
+      value: 8,
+      style: {
+        stroke: "#f40"
+      }
     },
     {
-      source: "Mme.Magloire",
-      target: "Myriel",
-      value: 10
+      source: "孔慈",
+      target: "雄霸-天下",
+      value: 10,
+      style: {
+        stroke: "#f40"
+      }
     },
     {
-      source: "Mme.Magloire",
-      target: "Mlle.Baptistine",
-      value: 6
+      source: "孔慈",
+      target: "步惊云",
+      value: 6,
+      style: {
+        stroke: "#f40"
+      }
     },
     {
-      source: "CountessdeLo",
-      target: "Myriel",
+      source: "聂风",
+      target: "雄霸-天下",
       value: 1
+    },
+    {
+      source: "孔慈",
+      target: "聂风",
+      value: 2
     }
   ]
 };
 const container = document.getElementById("container");
 const width = container.scrollWidth;
-const height = container.clientHeight || 800;
+const height = container.scrollHeight || 800;
 const graph = new G6.Graph({
   container: container,
   width: width,
@@ -61,8 +164,8 @@ const graph = new G6.Graph({
   },
   layout: {
     type: "dagre",
-    rankdir: "LR",
-    align: "UR"
+    rankdir: "LR"
+    // align: "UR"
   },
   defaultNode: {
     type: "circle",
