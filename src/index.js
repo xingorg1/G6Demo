@@ -57,7 +57,9 @@ const data = {
     },
     {
       id: "聂风",
+      type: "rect-jsx",
       name: "聂风",
+      color: "#2196f3",
       count: 123456,
       label1: "338.00",
       rate: 0.627,
@@ -65,7 +67,11 @@ const data = {
       currency: "Yuan",
       variableName: "V2",
       variableValue: 0.179,
-      variableUp: true
+      variableUp: true,
+      description: "雄霸的第三个义子，主角、暖男",
+      meta: {
+        creatorName: "聂人王、颜盈"
+      }
     }
   ],
   edges: [
@@ -339,6 +345,39 @@ G6.registerNode(
     }
   },
   "rect"
+);
+G6.registerNode(
+  "rect-jsx",
+  (cfg) => `
+    <group>
+      <rect>
+        <rect style={{
+          width: 150,
+          height: 20,
+          fill: ${cfg.color},
+          radius: [6, 6, 0, 0],
+          cursor: 'move'，
+          stroke: ${cfg.color}
+        }} draggable="true">
+          <text style={{ 
+            marginTop: 2, 
+            marginLeft: 75, 
+            textAlign: 'center', 
+            fontWeight: 'bold', 
+            fill: '#fff' }}>{{label}}</text>
+        </rect>
+        <rect style={{
+          width: 150,
+          height: 55,
+          stroke: ${cfg.color},
+          fill: #ffffff,
+          radius: [0, 0, 6, 6],
+        }}>
+          <text style={{ marginTop: 5, marginLeft: 3, fill: '#333', marginLeft: 4 }}>描述: {{description}}</text>
+          <text style={{ marginTop: 10, marginLeft: 3, fill: '#333', marginLeft: 4 }}>创建者: {{meta.creatorName}}</text>
+        </rect>
+      </rect>
+    </group>`
 );
 // 节点动画
 G6.registerNode(
