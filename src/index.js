@@ -1,4 +1,5 @@
 import G6 from "@antv/g6";
+// 节点优化
 // 节点动画
 G6.registerNode(
   "background-animate",
